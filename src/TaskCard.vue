@@ -1,22 +1,14 @@
 <script setup>
-import {
-    defineProps
-} from 'vue';
+import { defineProps } from "vue";
 
-import {
-    removeTask
-} from './globalState';
-import {
-    formatSecondsToHMS
-} from './util';
+import { removeTask } from "./globalState";
+import { formatSecondsToHMS } from "./util";
 
 const props = defineProps(["task"]);
 
-import {
-    ref
-} from 'vue';
+import { ref } from "vue";
 
-import { ClockIcon } from '@heroicons/vue/16/solid';
+import { ClockIcon } from "@heroicons/vue/16/solid";
 
 const runningTaskId = ref(null);
 const elapsedTime = ref(0);
@@ -51,24 +43,35 @@ const startTimer = () => {
 </script>
 
 <template>
-<div class="card">
-    <h2 class="flex">
-        <RouterLink :to="`/task/${task.id}`">{{ task.icon }} {{ task.title }}</RouterLink>
-        <button class="inline danger" @click="removeTask(task.id)">X</button>
-    </h2>
+    <div class="card">
+        <h2 class="flex">
+            <RouterLink :to="`/task/${task.id}`"
+                >{{ task.icon }} {{ task.title }}</RouterLink
+            >
+            <button class="inline danger" @click="removeTask(task.id)">
+                X
+            </button>
+        </h2>
 
-    <template v-if="runningTaskId === task.id && task.currentRunningInstance">
-        <ClockIcon class="inline-icon" /> Running... Estimated: {{ formatSecondsToHMS(task.currentRunningInstance.estDurationSec) }}
-        Elapsed: {{ formatSecondsToHMS(elapsedTime) }}<br />
-        <button class="danger" @click="stopInstance(task)">Complete Task</button>
-    </template>
-    <template v-else>
-        Avg. estimate: {{ formatSecondsToHMS(task.getAvgEstTime()) }}<br />
-        Avg. actual: {{ formatSecondsToHMS(task.getAvgRealTime()) }}<br />
-        Avg. bias: {{ formatSecondsToHMS(task.getAvgTimeBias()) }} ({{ task.getAvgTimeBiasPercentage()?.toFixed(1) }}%)<br />
-        <button @click="startNewInstance(task)">Start Tracking</button>
-    </template>
-</div>
+        <template
+            v-if="runningTaskId === task.id && task.currentRunningInstance"
+        >
+            <ClockIcon class="inline-icon" /> Running... Estimated:
+            {{ formatSecondsToHMS(task.currentRunningInstance.estDurationSec) }}
+            Elapsed: {{ formatSecondsToHMS(elapsedTime) }}<br />
+            <button class="danger" @click="stopInstance(task)">
+                Complete Task
+            </button>
+        </template>
+        <template v-else>
+            Avg. estimate: {{ formatSecondsToHMS(task.getAvgEstTime()) }}<br />
+            Avg. actual: {{ formatSecondsToHMS(task.getAvgRealTime()) }}<br />
+            Avg. bias: {{ formatSecondsToHMS(task.getAvgTimeBias()) }} ({{
+                task.getAvgTimeBiasPercentage()?.toFixed(1)
+            }}%)<br />
+            <button @click="startNewInstance(task)">Start Tracking</button>
+        </template>
+    </div>
 </template>
 
 <style scoped>

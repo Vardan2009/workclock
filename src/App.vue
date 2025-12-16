@@ -22,7 +22,7 @@ const route = useRoute();
   --bg-alt: #ffffff;
 
   --fg: #333;
-  
+
   --accent1: #4E598C;
   --accent1-hover: #3b4470;
 

@@ -1,19 +1,30 @@
 <script setup>
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { ref } from "vue";
+import { RouterLink } from "vue-router";
 
-import TaskCardPreview from '@/TaskCardPreview.vue';
+import TaskCardPreview from "@/TaskCardPreview.vue";
 
-import { addTask } from '@/globalState';
+import { addTask } from "@/globalState";
 
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 
 const taskTitle = ref("");
 const taskIcon = ref("");
 
-const allTaskIcons = ["📝", "📚", "🛠️", "💼", "🎨", "🎵", "🏃‍♂️", "🍳", "🧹", "🚀"];
+const allTaskIcons = [
+    "📝",
+    "📚",
+    "🛠️",
+    "💼",
+    "🎨",
+    "🎵",
+    "🏃‍♂️",
+    "🍳",
+    "🧹",
+    "🚀",
+];
 
 const createTask = () => {
     if (taskTitle.value.trim() === "") {
@@ -21,13 +32,12 @@ const createTask = () => {
         return;
     }
     addTask(taskTitle.value.trim(), taskIcon.value || "📝");
-    router.push('/');
+    router.push("/");
 };
-
 </script>
 
 <template>
-    <p><RouterLink to="/">Tasks</RouterLink> / Create new task </p>
+    <p><RouterLink to="/">Tasks</RouterLink> / Create new task</p>
 
     <h1>Create new task</h1>
 
@@ -41,7 +51,7 @@ const createTask = () => {
             v-for="icon in allTaskIcons"
             :key="icon"
             @click="taskIcon = icon"
-            :class="{'selected-icon': taskIcon === icon}"
+            :class="{ 'selected-icon': taskIcon === icon }"
             class="icon-button"
         >
             {{ icon }}
@@ -55,7 +65,6 @@ const createTask = () => {
     <hr />
 
     <button class="full-width" @click="createTask">Create Task</button>
-
 </template>
 
 <style>
@@ -90,5 +99,4 @@ input {
     width: 100%;
     font-size: 18px;
 }
-
 </style>
