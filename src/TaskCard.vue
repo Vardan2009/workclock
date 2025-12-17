@@ -14,6 +14,8 @@ const runningTaskId = ref(null);
 const elapsedTime = ref(0);
 let interval = null;
 
+const gettingDeleted = ref(false);
+
 const startNewInstance = async (task) => {
     const estTime = await props.durationModal.show(
         "Enter duration",
@@ -43,7 +45,7 @@ const startTimer = () => {
 </script>
 
 <template>
-    <div class="card">
+    <div :class="{ card: true, disabled: gettingDeleted }">
         <h2 class="flex">
             <RouterLink :to="`/app/task/${task.id}`"
                 >{{ task.icon }} {{ task.title }}</RouterLink
@@ -51,7 +53,13 @@ const startTimer = () => {
             <button
                 class="inline danger"
                 style="font-size: 14px"
-                @click="removeTask(task.id)"
+                :disabled="gettingDeleted"
+                @click="
+                    () => {
+                        removeTask(task.id);
+                        gettingDeleted = true;
+                    }
+                "
             >
                 <TrashIcon class="inline-icon" />
             </button>
@@ -73,7 +81,11 @@ const startTimer = () => {
             Avg. bias: {{ formatSecondsToHMS(task.getAvgTimeBias()) }} ({{
                 task.getAvgTimeBiasPercentage()?.toFixed(1)
             }}%)<br />
-            <button class="full-width" @click="startNewInstance(task)">
+            <button
+                :disabled="gettingDeleted"
+                class="full-width"
+                @click="startNewInstance(task)"
+            >
                 Start Tracking
             </button>
         </template>
@@ -86,5 +98,11 @@ div.card {
     border-radius: 8px;
     padding: 15px;
     margin: 15px 0px;
+
+    transition: opacity 0.3s ease-in-out;
+}
+
+div.card[disabled] {
+    opacity: 0.5;
 }
 </style>
