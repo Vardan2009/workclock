@@ -28,21 +28,21 @@ const allTaskIcons = [
     "🚀",
 ];
 
-const input = useTemplateRef('task-title-input');
+const input = useTemplateRef("task-title-input");
 
 onMounted(() => {
     input.value.focus();
-    document.addEventListener('keydown', onEsc);
+    document.addEventListener("keydown", onEsc);
 });
 
 onBeforeUnmount(() => {
-  document.removeEventListener('keydown', onEsc);
+    document.removeEventListener("keydown", onEsc);
 });
 
 const onEsc = (e) => {
-  if (e.key === "Escape") {
-    router.push("/app");
-  }
+    if (e.key === "Escape") {
+        router.push("/app");
+    }
 };
 
 const createTask = () => {
@@ -61,7 +61,12 @@ const createTask = () => {
     <h1>Create new task</h1>
 
     <h3>Task Title</h3>
-    <input ref="task-title-input" type="text" v-model="taskTitle" placeholder="Task Title" />
+    <input
+        ref="task-title-input"
+        type="text"
+        v-model="taskTitle"
+        placeholder="Task Title"
+    />
 
     <h3>Task Icon</h3>
 

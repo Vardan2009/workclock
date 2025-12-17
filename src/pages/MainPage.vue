@@ -20,7 +20,7 @@ const newTaskShortcut = async (e) => {
 
 onMounted(async () => {
     await loadTasks();
-    document.addEventListener("keydown",newTaskShortcut);
+    document.addEventListener("keydown", newTaskShortcut);
 });
 
 onBeforeUnmount(() => {
@@ -48,7 +48,6 @@ const onEnter = (el) => {
 };
 </script>
 
-
 <template>
     <div class="flex">
         <h1>Hello, {{ currentUser.username }}!</h1>
@@ -58,7 +57,10 @@ const onEnter = (el) => {
     </div>
 
     <div class="flex">
-        <h3><RectangleStackIcon class="inline-icon" /> Your Tasks <span class="italic translucent">(Ctrl+N)</span> </h3>
+        <h3>
+            <RectangleStackIcon class="inline-icon" /> Your Tasks
+            <span class="italic translucent">(Ctrl+N)</span>
+        </h3>
         <RouterLink to="/app/new-task">
             <button class="inline">+</button>
         </RouterLink>

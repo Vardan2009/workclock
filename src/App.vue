@@ -10,10 +10,14 @@ const route = useRoute();
         <div class="content-width">
             <div class="floating-corner">
                 <span class="italic">
-                    <span style="font-weight: 1000;">Work</span>Clock
+                    <span style="font-weight: 1000">Work</span>Clock
                 </span>
                 |
-                <a href="https://github.com/Vardan2009/time-manager-app" target="_blank">GitHub</a>
+                <a
+                    href="https://github.com/Vardan2009/time-manager-app"
+                    target="_blank"
+                    >GitHub</a
+                >
             </div>
 
             <Transition name="slide" mode="out-in">
@@ -185,5 +189,4 @@ div.floating-corner {
 .translucid {
     opacity: 0.6;
 }
-
 </style>

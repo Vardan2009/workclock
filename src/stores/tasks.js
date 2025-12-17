@@ -86,14 +86,16 @@ export class Task {
                 (now - this.currentRunningInstance.timestampStarted) / 1000,
             );
             this.currentRunningInstance.realDurationSec = elapsedSec;
-            
+
             // Send to server
             await apiFetch(`/tasks/${this.id}/instances`, {
                 method: "POST",
                 body: JSON.stringify({
-                    est_duration_sec: this.currentRunningInstance.estDurationSec,
+                    est_duration_sec:
+                        this.currentRunningInstance.estDurationSec,
                     real_duration_sec: elapsedSec,
-                    timestamp_started: this.currentRunningInstance.timestampStarted,
+                    timestamp_started:
+                        this.currentRunningInstance.timestampStarted,
                 }),
             });
 
@@ -110,9 +112,7 @@ export const store = reactive({
 export async function loadTasks() {
     try {
         const data = await apiFetch("/tasks");
-        store.tasks = data.tasks.map(
-            (t) => new Task(t.id, t.title, t.icon)
-        );
+        store.tasks = data.tasks.map((t) => new Task(t.id, t.title, t.icon));
         // Load instances
         store.tasks.forEach((task) => {
             const serverTask = data.tasks.find((st) => st.id === task.id);

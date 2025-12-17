@@ -1,25 +1,22 @@
 import copy
 import datetime
+import os
 
 from auth import generate_token, require_auth
-from db import TOKEN_TTL, tokens, users, tasks_db
+from db import TOKEN_TTL, tasks_db, tokens, users
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from passhash import hash_password, verify_password
-
-import os
 
 app = Flask(__name__)
 
 ALLOWED_ORIGINS = os.getenv(
     "CORS_ORIGINS",
-    "http://localhost:5173" # local dev default
+    "http://localhost:5173",  # local dev default
 )
 
-CORS(
-    app,
-    resources={r"/*": {"origins": ALLOWED_ORIGINS.split(",")}}
-)
+CORS(app, resources={r"/*": {"origins": ALLOWED_ORIGINS.split(",")}})
+
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -82,7 +79,6 @@ def logout():
     token = auth.replace("Bearer ", "")
     tokens.pop(token, None)
     return jsonify({"message": "Logged out"})
-
 
 
 @app.route("/tasks", methods=["GET"])

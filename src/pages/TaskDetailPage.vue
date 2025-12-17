@@ -13,17 +13,17 @@ const taskId = parseInt(route.params.id);
 const task = store.tasks.find((t) => t.id === taskId);
 
 onMounted(() => {
-    document.addEventListener('keydown', onEsc);
+    document.addEventListener("keydown", onEsc);
 });
 
 onBeforeUnmount(() => {
-  document.removeEventListener('keydown', onEsc);
+    document.removeEventListener("keydown", onEsc);
 });
 
 const onEsc = (e) => {
-  if (e.key === "Escape") {
-    router.push("/app");
-  }
+    if (e.key === "Escape") {
+        router.push("/app");
+    }
 };
 </script>
 

@@ -48,7 +48,11 @@ const startTimer = () => {
             <RouterLink :to="`/app/task/${task.id}`"
                 >{{ task.icon }} {{ task.title }}</RouterLink
             >
-            <button class="inline danger" style="font-size: 14px;" @click="removeTask(task.id)">
+            <button
+                class="inline danger"
+                style="font-size: 14px"
+                @click="removeTask(task.id)"
+            >
                 <TrashIcon class="inline-icon" />
             </button>
         </h2>
@@ -69,7 +73,9 @@ const startTimer = () => {
             Avg. bias: {{ formatSecondsToHMS(task.getAvgTimeBias()) }} ({{
                 task.getAvgTimeBiasPercentage()?.toFixed(1)
             }}%)<br />
-            <button class="full-width" @click="startNewInstance(task)">Start Tracking</button>
+            <button class="full-width" @click="startNewInstance(task)">
+                Start Tracking
+            </button>
         </template>
     </div>
 </template>
