@@ -7,10 +7,19 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from passhash import hash_password, verify_password
 
+import os
+
 app = Flask(__name__)
 
-CORS(app)
+ALLOWED_ORIGINS = os.getenv(
+    "CORS_ORIGINS",
+    "http://localhost:5173" # local dev default
+)
 
+CORS(
+    app,
+    resources={r"/*": {"origins": ALLOWED_ORIGINS.split(",")}}
+)
 
 @app.route("/register", methods=["POST"])
 def register():

@@ -1,6 +1,6 @@
 import { authStore } from "@/stores/auth";
 
-const API_BASE = "http://127.0.0.1:5000";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:5000";
 
 export async function apiFetch(endpoint, options = {}) {
     const headers = {
