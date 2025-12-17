@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps } from "vue";
 
-import { removeTask } from "./globalState";
+import { removeTask } from "./stores/tasks";
 import { formatSecondsToHMS } from "./util";
 
 const props = defineProps(["task"]);
@@ -45,7 +45,7 @@ const startTimer = () => {
 <template>
     <div class="card">
         <h2 class="flex">
-            <RouterLink :to="`/task/${task.id}`"
+            <RouterLink :to="`/app/task/${task.id}`"
                 >{{ task.icon }} {{ task.title }}</RouterLink
             >
             <button class="inline danger" @click="removeTask(task.id)">

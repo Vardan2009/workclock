@@ -1,10 +1,24 @@
 <script setup>
-import { addTask } from "@/globalState";
+import { addTask } from "@/stores/tasks";
 import TaskCard from "@/TaskCard.vue";
-import { store } from "@/globalState";
-import { RouterLink } from "vue-router";
+import { store } from "@/stores/tasks";
+import { RouterLink, useRouter } from "vue-router";
 
-import { RectangleStackIcon } from "@heroicons/vue/16/solid";
+import { getUser, logout } from "@/auth";
+
+const router = useRouter();
+
+let currentUser = await getUser();
+
+const logoutBtn = () => {
+    logout();
+    router.push("/app/login");
+};
+
+import {
+    RectangleStackIcon,
+    ArrowLeftEndOnRectangleIcon,
+} from "@heroicons/vue/16/solid";
 
 const btnAddTask = () => {
     const taskName = prompt("Enter task name:");
@@ -18,11 +32,16 @@ const onEnter = (el) => {
 </script>
 
 <template>
-    <h1>Hello, username!</h1>
+    <div class="flex">
+        <h1>Hello, {{ currentUser.username }}!</h1>
+        <button class="inline" @click="logoutBtn">
+            <ArrowLeftEndOnRectangleIcon class="inline-icon" />
+        </button>
+    </div>
 
     <div class="flex">
         <h3><RectangleStackIcon class="inline-icon" /> Your Tasks</h3>
-        <RouterLink to="/new-task">
+        <RouterLink to="/app/new-task">
             <button class="inline">+</button>
         </RouterLink>
     </div>

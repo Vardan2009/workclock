@@ -4,7 +4,7 @@ import { RouterLink } from "vue-router";
 
 import TaskCardPreview from "@/TaskCardPreview.vue";
 
-import { addTask } from "@/globalState";
+import { addTask } from "@/stores/tasks";
 
 import { useRouter } from "vue-router";
 
@@ -32,12 +32,12 @@ const createTask = () => {
         return;
     }
     addTask(taskTitle.value.trim(), taskIcon.value || "📝");
-    router.push("/");
+    router.push("/app");
 };
 </script>
 
 <template>
-    <p><RouterLink to="/">Tasks</RouterLink> / Create new task</p>
+    <p><RouterLink to="/app">Tasks</RouterLink> / Create new task</p>
 
     <h1>Create new task</h1>
 
@@ -83,20 +83,5 @@ const createTask = () => {
     border-radius: 8px;
     cursor: pointer;
     transition: border-color 0.3s;
-}
-
-input {
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid var(--accent1);
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-}
-
-.full-width {
-    width: 100%;
-    font-size: 18px;
 }
 </style>

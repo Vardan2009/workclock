@@ -1,11 +1,15 @@
+import copy
 import datetime
 
 from auth import generate_token, require_auth
 from db import TOKEN_TTL, tokens, users
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from passhash import hash_password, verify_password
 
 app = Flask(__name__)
+
+CORS(app)
 
 
 @app.route("/register", methods=["POST"])
@@ -20,7 +24,7 @@ def register():
     if username in users:
         return jsonify({"error": "User already exists"}), 400
 
-    users[username] = {"password_hash": hash_password(password)}
+    users[username] = {"password_hash": hash_password(password), "username": username}
 
     return jsonify({"message": "User registered successfully"}), 201
 
@@ -50,10 +54,16 @@ def login():
     )
 
 
-@app.route("/protected", methods=["GET"])
+@app.route("/user", methods=["GET"])
 @require_auth
-def protected():
-    return jsonify({"message": f"Hello, {request.user}! You are authenticated."})
+def user():
+    user_data = copy.copy(users[request.user])
+
+    del user_data["password_hash"]
+
+    print(user_data)
+
+    return user_data
 
 
 @app.route("/logout", methods=["POST"])

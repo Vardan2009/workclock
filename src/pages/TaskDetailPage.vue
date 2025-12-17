@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute, RouterLink } from "vue-router";
-import { store } from "@/globalState";
+import { store } from "@/stores/tasks";
 import { formatSecondsToHMS } from "@/util";
 
 const route = useRoute();
@@ -11,7 +11,7 @@ const task = store.tasks.find((t) => t.id === taskId);
 
 <template>
     <div v-if="task">
-        <p><RouterLink to="/">Tasks</RouterLink> / {{ task.title }}</p>
+        <p><RouterLink to="/app">Tasks</RouterLink> / {{ task.title }}</p>
         <h1 class="italic title">{{ task.icon }} {{ task.title }}</h1>
 
         <div class="stats">
