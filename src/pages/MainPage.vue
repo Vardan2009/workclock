@@ -12,7 +12,8 @@ const router = useRouter();
 let currentUser = await getUser();
 
 const newTaskShortcut = async (e) => {
-    if (e.ctrlKey && e.key === "n") {
+    console.log(e.ctrlKey, e.shiftKey, e.key);
+    if (e.ctrlKey && e.key === "N" && e.shiftKey) {
         e.preventDefault();
         await router.push("/app/new-task");
     }
@@ -59,7 +60,7 @@ const onEnter = (el) => {
     <div class="flex">
         <h3>
             <RectangleStackIcon class="inline-icon" /> Your Tasks
-            <span class="italic translucent">(Ctrl+N)</span>
+            <span class="italic translucent">(Ctrl+Shift+N)</span>
         </h3>
         <RouterLink to="/app/new-task">
             <button class="inline">+</button>
