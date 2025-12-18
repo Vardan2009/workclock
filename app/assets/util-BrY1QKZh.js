@@ -1,0 +1,1 @@
+function f(t){if(isNaN(t))return"N/A";const r=t<0?"-":"";t=Math.abs(t);const n=Math.floor(t/3600),s=Math.floor(t%3600/60),o=t%60,i=n.toString().padStart(2,"0"),a=s.toString().padStart(2,"0"),u=o.toString().padStart(2,"0");return`${r}${i}:${a}:${u}`}export{f};
