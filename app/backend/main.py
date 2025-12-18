@@ -107,7 +107,7 @@ def create_task():
         "title": title,
         "icon": icon,
         "task_instances": [],
-        "task_note": "Write your notes here",
+        "task_note": "",
         "created_at": datetime.datetime.utcnow().isoformat(),
     }
 
