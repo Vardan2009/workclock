@@ -22,7 +22,7 @@ onBeforeUnmount(() => {
 
 const onEsc = (e) => {
     if (e.key === "Escape") {
-        router.push("/app");
+        router.push("/");
     }
 };
 </script>

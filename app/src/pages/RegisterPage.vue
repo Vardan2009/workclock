@@ -17,7 +17,7 @@ async function submit() {
     blockInputs.value = true;
     try {
         await register(username.value, password.value);
-        router.push("/app/login");
+        router.push("/login");
     } catch (err) {
         error.value = err.message;
     } finally {
@@ -31,9 +31,7 @@ async function submit() {
         <h1>Register a new account</h1>
         <div class="flex" style="margin: 10px">
             <p class="danger" v-if="error">{{ error }}</p>
-            <RouterLink to="/app/login"
-                >Already have an account? Log in</RouterLink
-            >
+            <RouterLink to="/login">Already have an account? Log in</RouterLink>
         </div>
         <input
             :disabled="blockInputs"

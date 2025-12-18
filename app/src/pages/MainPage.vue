@@ -21,7 +21,7 @@ const newTaskShortcut = async (e) => {
     console.log(e.ctrlKey, e.shiftKey, e.key);
     if (e.ctrlKey && e.key === "N" && e.shiftKey) {
         e.preventDefault();
-        await router.push("/app/new-task");
+        await router.push("/new-task");
     }
 };
 
@@ -36,7 +36,7 @@ onBeforeUnmount(() => {
 
 const logoutBtn = () => {
     logout();
-    router.push("/app/login");
+    router.push("/login");
 };
 
 import {

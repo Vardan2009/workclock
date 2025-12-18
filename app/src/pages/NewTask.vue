@@ -41,7 +41,7 @@ onBeforeUnmount(() => {
 
 const onEsc = (e) => {
     if (e.key === "Escape") {
-        router.push("/app");
+        router.push("/");
     }
 };
 
@@ -51,12 +51,12 @@ const createTask = () => {
         return;
     }
     addTask(taskTitle.value.trim(), taskIcon.value || "📝");
-    router.push("/app");
+    router.push("/");
 };
 </script>
 
 <template>
-    <p><RouterLink to="/app">Tasks</RouterLink> / Create new task</p>
+    <p><RouterLink to="/">Tasks</RouterLink> / Create new task</p>
 
     <h1>Create new task</h1>
 

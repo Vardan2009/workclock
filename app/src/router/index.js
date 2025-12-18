@@ -7,10 +7,6 @@ const router = createRouter({
     routes: [
         {
             path: "/",
-            redirect: "/app",
-        },
-        {
-            path: "/app",
             name: "main",
             component: () => import("../pages/MainPage.vue"),
             meta: {
@@ -18,17 +14,17 @@ const router = createRouter({
             },
         },
         {
-            path: "/app/login",
+            path: "/login",
             name: "login",
             component: () => import("../pages/LoginPage.vue"),
         },
         {
-            path: "/app/register",
+            path: "/register",
             name: "register",
             component: () => import("../pages/RegisterPage.vue"),
         },
         {
-            path: "/app/task/:id",
+            path: "/task/:id",
             name: "taskDetail",
             component: () => import("../pages/TaskDetailPage.vue"),
             meta: {
@@ -36,7 +32,7 @@ const router = createRouter({
             },
         },
         {
-            path: "/app/new-task",
+            path: "/new-task",
             name: "newTask",
             component: () => import("../pages/NewTask.vue"),
             meta: {
