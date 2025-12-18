@@ -2,6 +2,8 @@
 import { useRoute } from "vue-router";
 import { Suspense } from "vue";
 
+import ThemeSwitch from "./ThemeSwitch.vue";
+
 const route = useRoute();
 </script>
 
@@ -18,6 +20,8 @@ const route = useRoute();
                     target="_blank"
                     >GitHub</a
                 >
+
+                <ThemeSwitch />
             </div>
 
             <Transition name="slide" mode="out-in">
@@ -36,7 +40,7 @@ const route = useRoute();
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap");
 
-:root {
+:root, .light {
     --bg: #e8e8e8;
     --bg-alt: #ffffff;
 
@@ -50,6 +54,91 @@ const route = useRoute();
 
     --danger: #ff4c4c;
     --danger-hover: #e63b3b;
+}
+
+.dark {
+    --bg: #121212;
+    --bg-alt: #1e1e1e;
+    --fg: #e6e6e6;
+
+    --accent1: #8a95d6;
+    --accent1-hover: #717dc4;
+
+    --accent2: #ff9f5a;
+    --accent2-hover: #ff8b3a;
+
+    --danger: #ff6b6b;
+    --danger-hover: #ff5252;
+}
+
+.forest {
+    --bg: #e9f0ea;
+    --bg-alt: #ffffff;
+    --fg: #2f3e34;
+
+    --accent1: #4f7f67;
+    --accent1-hover: #3f6854;
+
+    --accent2: #9bcf9b;
+    --accent2-hover: #84b985;
+
+    --danger: #c94a4a;
+    --danger-hover: #b53a3a;
+}
+
+.ocean {
+    --bg: #e6f2f8;
+    --bg-alt: #ffffff;
+    --fg: #1f3b4d;
+
+    --accent1: #2b7bb9;
+    --accent1-hover: #22659a;
+
+    --accent2: #4fc3d7;
+    --accent2-hover: #3fb0c4;
+
+    --danger: #e05252;
+    --danger-hover: #c94444;
+}
+
+.sunset {
+    --bg: #fff1e6;
+    --bg-alt: #ffffff;
+    --fg: #4a2e1f;
+
+    --accent1: #ff7a59;
+    --accent1-hover: #e8664a;
+
+    --accent2: #ffb347;
+    --accent2-hover: #e89b33;
+
+    --danger: #d64545;
+    --danger-hover: #bf3737;
+}
+
+.nord {
+    --bg: #2e3440;
+    --bg-alt: #3b4252;
+    --fg: #eceff4;
+
+    --accent1: #88c0d0;
+    --accent1-hover: #81a1c1;
+
+    --accent2: #a3be8c;
+    --accent2-hover: #8fbc8f;
+
+    --danger: #bf616a;
+    --danger-hover: #a54e56;
+}
+
+* {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        fill 0.3s ease,
+        stroke 0.3s ease;
 }
 
 body {
@@ -103,6 +192,10 @@ button.danger {
 
 button.danger:hover {
     background-color: var(--danger-hover);
+}
+
+hr {
+    border: 1px solid var(--bg-alt);
 }
 
 button[disabled] {
@@ -182,11 +275,32 @@ input {
     padding: 10px;
     font-size: 16px;
     border: 2px solid var(--accent1);
+    background-color: var(--bg-alt);
+    color: inherit;
+    font: inherit;
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 20px;
 }
+
+textarea {
+    box-sizing: border-box;
+
+    border: none;
+    width: 100%;
+    color: inherit;
+    height: 300px;
+    resize: vertical;
+
+    background-color: var(--bg-alt);
+    outline: none;
+
+    padding: 30px;
+
+    font: inherit;
+}
+
 
 button.full-width {
     width: 100%;
@@ -194,6 +308,10 @@ button.full-width {
 }
 
 div.floating-corner {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
     font-size: 14pt;
     font-style: italic;
     z-index: -10;

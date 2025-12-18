@@ -108,21 +108,4 @@ const updateNote = async    () => {
 </template>
 
 <style scoped>
-
-textarea {
-    box-sizing: border-box;
-
-    border: none;
-    width: 100%;
-    height: 300px;
-    resize: vertical;
-
-    background-color: var(--bg-alt);
-    outline: none;
-
-    padding: 30px;
-
-    font: inherit;
-}
-
 </style>
