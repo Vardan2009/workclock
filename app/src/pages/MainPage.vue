@@ -66,7 +66,7 @@ const onEnter = (el) => {
 
     <h3><RectangleStackIcon class="inline-icon" /> Your Tasks</h3>
 
-    <RouterLink to="/app/new-task">
+    <RouterLink to="/new-task">
         <button class="full-width">
             + Add Task
             <span class="italic translucent">(Ctrl+Shift+N)</span>

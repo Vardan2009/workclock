@@ -47,7 +47,7 @@ const startTimer = () => {
 <template>
     <div :class="{ card: true, disabled: gettingDeleted }">
         <h2 class="flex">
-            <RouterLink :to="`/app/task/${task.id}`"
+            <RouterLink :to="`/task/${task.id}`"
                 >{{ task.icon }} {{ task.title }}</RouterLink
             >
             <button
@@ -71,7 +71,7 @@ const startTimer = () => {
             <ClockIcon class="inline-icon" /> Running... Estimated:
             {{ formatSecondsToHMS(task.currentRunningInstance.estDurationSec) }}
             Elapsed: {{ formatSecondsToHMS(elapsedTime) }}<br />
-            <button class="danger" @click="stopInstance(task)">
+            <button class="danger full-width" @click="stopInstance(task)">
                 Complete Task
             </button>
         </template>

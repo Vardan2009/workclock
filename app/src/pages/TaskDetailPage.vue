@@ -29,7 +29,7 @@ const onEsc = (e) => {
 
 <template>
     <div v-if="task">
-        <p><RouterLink to="/app">Tasks</RouterLink> / {{ task.title }}</p>
+        <p><RouterLink to="/">Tasks</RouterLink> / {{ task.title }}</p>
         <h1 class="italic title">{{ task.icon }} {{ task.title }}</h1>
 
         <div class="stats">

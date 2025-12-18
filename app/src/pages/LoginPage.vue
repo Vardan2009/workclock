@@ -17,7 +17,7 @@ async function submit() {
     blockInputs.value = true;
     try {
         await login(username.value, password.value);
-        router.push("/app");
+        router.push("/");
     } catch (err) {
         error.value = err.message;
     } finally {
@@ -31,7 +31,7 @@ async function submit() {
         <h1>Log in</h1>
         <div class="flex" style="margin: 10px">
             <p class="danger" v-if="error">{{ error }}</p>
-            <RouterLink to="/app/register">No account? Register</RouterLink>
+            <RouterLink to="/register">No account? Register</RouterLink>
         </div>
         <input
             :disabled="blockInputs"
