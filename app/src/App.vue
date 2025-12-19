@@ -234,7 +234,7 @@ a:hover {
 
 .slide-enter-active,
 .slide-leave-active {
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
 }
 
 .slide-enter-from {
