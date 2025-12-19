@@ -208,7 +208,7 @@ button[disabled].danger {
     background-color: var(--danger-hover);
 }
 
-p.danger {
+p.danger, span.danger {
     color: var(--danger);
 }
 

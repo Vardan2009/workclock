@@ -14,6 +14,8 @@ const taskId = parseInt(route.params.id);
 
 const task = store.tasks.find((t) => t.id === taskId);
 
+let debounceTimeout = null;
+
 onMounted(() => {
     if(!task) 
         router.push("/");
@@ -23,6 +25,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
     document.removeEventListener("keydown", onEsc);
+    if (debounceTimeout) clearTimeout(debounceTimeout);
 });
 
 const onEsc = (e) => {
@@ -32,12 +35,21 @@ const onEsc = (e) => {
 };
 
 const unsavedChanges = ref(false)
-const taskNotesInput = ref(task.notes)
+const savingChanges = ref(false)
+const taskNotesInput = ref(task.task_note)
 
-const updateNote = async    () => {
+const updateNote = () => {
     unsavedChanges.value = true;
-    await updateTaskNote(task.id, taskNotesInput.value);
-    unsavedChanges.value = false;
+    savingChanges.value = false;
+    
+    if (debounceTimeout) clearTimeout(debounceTimeout);
+    
+    debounceTimeout = setTimeout(async () => {
+        savingChanges.value = true;
+        await updateTaskNote(task.id, taskNotesInput.value);
+        unsavedChanges.value = false;
+        savingChanges.value = false;
+    }, 300);
 }
 
 </script>
@@ -67,9 +79,10 @@ const updateNote = async    () => {
         <hr />
         <h3>
             Task notes
-            <span v-if="unsavedChanges">*</span>
+            <span v-if="unsavedChanges" class="danger">*</span>
+            <span v-if="savingChanges" class="italic">Saving changes...</span>
         </h3>
-        <textarea @change="updateNote" v-model="taskNotesInput" name="task-notes"></textarea>
+        <textarea @input="updateNote" v-model="taskNotesInput" name="task-notes"></textarea>
 
         <hr />
 
@@ -86,18 +99,18 @@ const updateNote = async    () => {
                 <strong>Instance {{ index + 1 }}</strong>
                 <p>
                     Started:
-                    {{ new Date(instance.timestampStarted).toLocaleString() }}
+                    {{ new Date(instance.timestamp_started).toLocaleString() }}
                 </p>
                 <p>
-                    Estimated: {{ formatSecondsToHMS(instance.estDurationSec) }}
+                    Estimated: {{ formatSecondsToHMS(instance.est_duration_sec) }}
                 </p>
                 <p>
-                    Actual: {{ formatSecondsToHMS(instance.realDurationSec) }}
+                    Actual: {{ formatSecondsToHMS(instance.real_duration_sec) }}
                 </p>
                 <p>
                     Bias: {{ formatSecondsToHMS(instance.getTimeBias()) }} ({{
                         (
-                            (instance.getTimeBias() / instance.estDurationSec) *
+                            (instance.getTimeBias() / instance.est_duration_sec) *
                             100
                         ).toFixed(1)
                     }}%)
