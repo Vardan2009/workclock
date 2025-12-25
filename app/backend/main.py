@@ -2,7 +2,7 @@ import copy
 import datetime
 import os
 
-from auth import generate_token, require_auth
+from auth import generate_token, require_auth, validate_username, validate_password
 from db import TOKEN_TTL, tasks_db, tokens, users, running_instances
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -20,17 +20,21 @@ CORS(app, resources={r"/*": {"origins": ALLOWED_ORIGINS.split(",")}})
 @app.route("/register", methods=["POST"])
 def register():
     data = request.json or {}
-    username = data.get("username")
-    password = data.get("password")
+    username = data.get("username", "").strip()
+    password = data.get("password", "")
 
-    if not username or not password:
-        return jsonify({"error": "Missing username or password"}), 400
+    is_valid, error_msg = validate_username(username)
+    if not is_valid:
+        return jsonify({"error": error_msg}), 400
+
+    is_valid, error_msg = validate_password(password)
+    if not is_valid:
+        return jsonify({"error": error_msg}), 400
 
     if username in users:
-        return jsonify({"error": "User already exists"}), 400
+        return jsonify({"error": "User already exists"}), 409
 
     users[username] = {"password_hash": hash_password(password), "username": username}
-
     return jsonify({"message": "User registered successfully"}), 201
 
 
